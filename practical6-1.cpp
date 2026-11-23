@@ -1,81 +1,100 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
+
+#include<iostream>
+#include<iomanip>
 using namespace std;
 
 int main()
 {
-    cout << "****************************************" << endl;
-    cout << "Sports Events Score Analysis" << endl;
-    cout << "****************************************" << endl;
+    // Variable declaration
+    short int i,n;
 
-    int i, N, total = 0;
-    int S[20]; // allow up to 20 participants
-    int highest, lowest;
+    // Two-dimensional character arrays to store participant ID and name
+    char participant_id[20][10], participant_name[20][20];
 
-    string name[20], id[20];
+    // Array to store scores and variables for calculations
+    int score[20], total=0, avg, highestS, lowestS;
 
-    // Input number of participants
-    cout << "Enter number of participants: ";
-    cin >> N;
+    // Display program heading
+    cout<<"********************************************"<<endl;
+    cout<<" SPORTS EVENT SCORE ANALYSIS"<<endl;
+    cout<<"********************************************"<<endl;
 
-    if (N <= 0 || N > 20)
+    // Accept number of participants
+    cout<<"Enter number of participants : ";
+    cin>>n;
+
+    // Validate number of participants
+    if (n>20 || n<=0)
     {
-        cout << "Invalid number of participants" << endl;
+        cout<<"Invalid number of participants ";
+        return 0;
     }
-    else
+
+    // Accept participant details
+    for(i=0; i<n; i++)
     {
-        // Input participant details and calculate total
-        for (i = 0; i < N; i++)
-        {
-            cout << "Enter participant ID: ";
-            cin >> id[i];
-            cin.ignore();
+        cout<<"Enter participant ID : ";
+        cin>>participant_id[i];
 
-            cout << "Enter participant Name: ";
-            getline(cin, name[i]);
+        cout<<"Enter participant name : ";
+        cin>>participant_name[i];
 
-            cout << "Enter score: ";
-            cin >> S[i];
+        cout<<"Enter participant score : ";
+        cin>>score[i];
 
-            total += S[i]; // add each score to total
-        }
-
-        // Initialize highest and lowest with first score
-        highest = S[0];
-        lowest = S[0];
-
-        // Find highest and lowest scores
-        for (i = 1; i < N; i++)
-        {
-            if (S[i] > highest)
-                highest = S[i];
-            if (S[i] < lowest)
-                lowest = S[i];
-        }
-
-        // Display participant performance
-        cout << endl;
-        cout << "------------------------------" << endl;
-        cout << "Participant Performance" << endl;
-        cout << "------------------------------" << endl;
-        cout << left << setw(10) << "ID"
-             << left << setw(15) << "NAME"
-             << left << setw(10) << "SCORE" << endl;
-
-        for (i = 0; i < N; i++)
-        {
-            cout << left << setw(10) << id[i]
-                 << left << setw(15) << name[i]
-                 << left << setw(10) << S[i] << endl;
-        }
-
-        // Display summary
-        cout << endl;
-        cout << "Total Marks : " << total << endl;   //  correct total
-        cout << "Highest Score : " << highest << endl;
-        cout << "Lowest Score : " << lowest << endl;
+        cout<<endl;
     }
+
+    // Display participant performance table
+    cout<<"----------------------------------------------"<<endl;
+    cout<<"Participant Performance"<<endl;
+    cout<<"-----------------------------------------------"<<endl;
+    cout<<"ID"<<"     "<<"Name"<<"     "<<"Score"<<"     "<<endl;
+    cout<<"-----------------------------------------------"<<endl;
+
+    for(i=0; i<n; i++)
+    {
+        cout<<left<<setw(8)<<participant_id[i];
+        cout<<left<<setw(8)<<participant_name[i];
+        cout<<score[i];
+        cout<<endl;
+    }
+
+    cout<<"----------------------------------------------"<<endl;
+
+    // Calculate total score
+    for(i=0; i<n; i++)
+    {
+        total+=score[i];
+    }
+
+    // Calculate average score
+    avg = total/n;
+
+    cout<<"Total score : "<<total<<endl;
+    cout<<"Average score : "<<avg<<endl;
+
+    // Initialize highest and lowest with the first score
+    highestS=score[0];
+    lowestS=score[0];
+
+    // Find highest and lowest scores
+    for(i=0; i<n; i++)
+    {
+        if(score[i]>highestS)
+        {
+            highestS=score[i];
+        }
+
+        if(score[i]<lowestS)
+        {
+            lowestS=score[i];
+        }
+    }
+
+    // Display highest and lowest scores
+    cout<<"Highest Score : "<<highestS<<endl;
+    cout<<"Lowest score : "<<lowestS;
 
     return 0;
 }
