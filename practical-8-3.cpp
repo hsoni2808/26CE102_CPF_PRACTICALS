@@ -1,121 +1,121 @@
-#include <iostream>
+//practical 8.3
+#include<iostream>
 using namespace std;
 
-// Counts the number of recursive function calls
-int recursiveCalls = 0;
-
-// Recursive Factorial
-int factorialRecursive(int n)
+//Part A-----------Factorial iteractive----------------
+int factorialIteractive(int n)
 {
-    recursiveCalls++;
-
-    if(n == 0 || n == 1)
-        return 1;
-
-    return n * factorialRecursive(n - 1);
-}
-
-// Iterative Factorial
-int factorialIterative(int n)
-{
-    int fact = 1;
-
-    for(int i = 1; i <= n; i++)
-        fact *= i;
-
+    int i=1;
+    int fact=1;
+    while(i<=n)
+    {
+        fact=i*fact;
+        i++;
+    }
     return fact;
 }
-
-// Recursive Fibonacci
-int fibonacciRecursive(int n)
+//-----------recursive-----------------
+int factorialRecursive(int n)
 {
-    recursiveCalls++;
 
-    if(n <= 1)
-        return n;
+    if(n==0)
+    {
+        return 1;
+    }
 
-    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2);
+    return n*factorialRecursive(n-1);
+
 }
 
-// Iterative Fibonacci Series
-void fibonacciIterative(int n)
+
+//Part B---------------Fibonacci Series recursive------------
+int fibonacciRecursive(int num)
 {
-    int a = 0, b = 1, c;
-
-    for(int i = 0; i < n; i++)
+    if(num<=1)
     {
-        cout << a << " ";
-
-        c = a + b;
-        a = b;
-        b = c;
+        return num;
+    }
+    return fibonacciRecursive(num-1)+fibonacciRecursive(num-2);
+}
+void displayFibonaccirecursive(int num)
+{
+    for(int i=0; i<num; i++)
+    {
+        cout<<fibonacciRecursive(i)<<"  ";
     }
 }
+
+//-----------iteractive---------------
+void fibonacci(int num)
+{
+    long int term1=0,term2=1,nextterm;
+    if(num<=0)
+    {
+        return ;
+
+    }
+    for(int i=0; i<num; i++)
+    {
+        if(i==0)
+        {
+            cout<<term1<<"  ";
+        }
+        else if(i==1)
+        {
+            cout<<term2<<"  ";
+        }
+        else
+        {
+            nextterm=term1+term2;
+            cout<<nextterm<<"  ";
+            term1=term2;
+            term2=nextterm;
+
+        }
+    }
+}
+
+
 
 int main()
 {
+
+    //Part A-Factorial
     int n;
+    cout<<"Enter Num for Factorial:";
+    cin>>n;
+    cout<<"Factorial of "<< n<<" in interactive case"<<": "<<factorialIteractive(n)<<endl;
+    cout<<"Factorial of "<< n<<" in recursive case"<<": "<<factorialRecursive(n)<<endl<<endl;
+    cout<<"------------------------------------------------------------\n\n";
 
-    cout << "Enter a number: ";
-    cin >> n;
+    //Part B-Fibonacci Series
+    int num;
+    cout<<"Enter Num of Fibonacci Series:";
+    cin>>num;
+    //recursive............
+    cout<<"Recursive case of fibonacci series:";
+    displayFibonaccirecursive(num);
+    cout<<endl;
+    //iterctive............
+    cout<<"Iterective case of fibonacci serirs:";
+    fibonacci(num);
+    cout<<endl<<endl<<endl;
 
-    // PART A: FACTORIAL
+    //Part C-Comparison
+    cout<<"--------Comparison---------\n\n";
+    cout<<"->> For Factorial:\n";
+    cout<<"    1. In Iterative approach and Recursive approach both have one function.\n";
+    cout<<"    2. Iterative approach is BEST because Time complexity less than Recursive approach\n\n";
 
-    cout << "\n----- FACTORIAL -----\n";
+    cout<<"->> For Fibonacci Series:\n";
+    cout<<"    1. In Iterative approach have one function and Recursive approach have two function because one for count Fibonacci Series and second display fibonacci series.\n";
+    cout<<"    2. Iterative approach is BEST because Time complexity less than Recursive approach\n";
 
-    cout << "Iterative Factorial = "
-         << factorialIterative(n) << endl;
 
-    recursiveCalls = 0;
 
-    cout << "Recursive Factorial = "
-         << factorialRecursive(n) << endl;
 
-    cout << "Recursive Function Calls = "
-         << recursiveCalls << endl;
 
-    // PART B: FIBONACCI SERIES
 
-    cout << "\n----- FIBONACCI SERIES -----\n";
-
-    cout << "Iterative Series: ";
-    fibonacciIterative(n);
-
-    cout << endl;
-
-    cout << "Recursive Series: ";
-
-    recursiveCalls = 0;
-
-    for(int i = 0; i < n; i++)
-    {
-        cout << fibonacciRecursive(i) << " ";
-    }
-
-    cout << endl;
-
-    cout << "Recursive Function Calls = "
-         << recursiveCalls << endl;
-
-    // PART C: COMPARISON
-
-    cout << "\n----- COMPARISON -----\n";
-
-    cout << "1. Function Calls:\n";
-    cout << "   Iterative -> Few calls\n";
-    cout << "   Recursive -> More calls\n\n";
-
-    cout << "2. Readability:\n";
-    cout << "   Recursive code is shorter and mathematical.\n";
-    cout << "   Iterative code is straightforward.\n\n";
-
-    cout << "3. Code Complexity:\n";
-    cout << "   Iterative -> Simple loops.\n";
-    cout << "   Recursive -> Base case + recursive call.\n\n";
-
-    cout << "4. Execution Flow:\n";
-    cout << "   Iterative -> Top to Bottom.\n";
-    cout << "   Recursive -> Uses Call Stack.\n";
 
     return 0;
 }
